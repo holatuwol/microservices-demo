@@ -212,7 +212,7 @@ public final class AdService {
       return;
     }
     logger.info("Tracing enabled but temporarily unavailable");
-    logger.info("See https://github.com/GoogleCloudPlatform/microservices-demo/issues/422 for more info.");
+    logger.info("See https://github.com/GoogleCloudPlatform/microservices-demo/issues/422 for additional information on what it means to be enabled but temporarily unavailable.");
 
     // TODO(arbrown) Implement OpenTelemetry tracing
     
