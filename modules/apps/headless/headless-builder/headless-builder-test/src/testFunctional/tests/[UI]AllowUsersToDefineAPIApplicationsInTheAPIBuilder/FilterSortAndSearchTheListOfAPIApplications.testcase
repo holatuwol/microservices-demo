@@ -10,7 +10,7 @@ definition {
 	setUp {
 		TestCase.setUpPortalInstance();
 
-		User.firstLoginPG();
+		User.firstLoginUI();
 
 		task ("Given three applications and one of the status of the applications is published") {
 			ApplicationAPI.createAPIApplication(
