@@ -11,7 +11,11 @@ This style guide outlines the coding conventions for Java code developed at Life
 When possible, when variables are collected as values of a map or JSON object, each variable's name should match the key.
 
 ```java
+// boolean isActive = false;
 boolean active = false;
+
+// JSONObject jsonObject = JSONUtil.put(
+//  "active", isActive);
 
 JSONObject jsonObject = JSONUtil.put(
         "active", active
@@ -66,29 +70,27 @@ Aside from `_log`, avoid declaring static final variables if they are only refer
 
 ---
 
-Log messages at the start of a method or in the middle of the method body should start with verbs in present progressive.
+Log messages at the start of a method or in the middle of the method body should start with verbs in present progressive. Log messages near the end of a method should start with verbs in the past tense.
 
 ```java
 private void _doWork() {
   _log.debug("Adding data");
+
+  // complicated logic line 1
+  // complicated logic line 2
+  // complicated logic line 3
+
   _log.debug("Modifying data");
+
+  // complicated logic line 4
+  // complicated logic line 5
+  // complicated logic line 6
+
   _log.debug("Deleting data");
 
-  // complicated logic line 1
-  // complicated logic line 2
-  // complicated logic line 3
-}
-```
-
----
-
-Log messages near the end of a method should start with verbs in the past tense.
-
-```java
-private void _doWork() {
-  // complicated logic line 1
-  // complicated logic line 2
-  // complicated logic line 3
+  // complicated logic line 7
+  // complicated logic line 8
+  // complicated logic line 9
 
   _log.debug("Added data");
   _log.debug("Modified data");
@@ -98,9 +100,10 @@ private void _doWork() {
 
 ---
 
-Log messages should avoid using `the`
+Log messages should avoid definitive articles.
 
 ```java
+// _log.debug("Unable to generate the date");
 _log.debug("Unable to generate date");
 ```
 
