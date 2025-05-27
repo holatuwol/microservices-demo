@@ -65,7 +65,7 @@ public class UserSegmentsCriteriaContributor
 
 		String newFilterString = filterString;
 
-		Matcher matcher = _pattern.matcher(filterString);
+		Matcher matcher = _roleIdsPattern.matcher(filterString);
 
 		while (matcher.find()) {
 			long roleId = _getRoleId(matcher.group());
@@ -78,6 +78,18 @@ public class UserSegmentsCriteriaContributor
 					_getOrganizationIdsFilterString(roleId),
 					_getUserGroupIdsFilterString(roleId),
 					StringPool.CLOSE_PARENTHESIS));
+		}
+
+		matcher = _dateModifiedPattern.matcher(filterString);
+
+		while (matcher.find()) {
+			String date = matcher.group("date");
+
+			newFilterString = StringUtil.replace(
+				newFilterString, matcher.group(),
+				StringBundler.concat(
+					"dateModified ge ", date, "T00:00:00.000Z and ",
+					"dateModified le ", date, "T23:59:59.999Z"));
 		}
 
 		criteria.addFilter(getType(), newFilterString, conjunction);
@@ -249,7 +261,9 @@ public class UserSegmentsCriteriaContributor
 		return String.join(" or ", conditions);
 	}
 
-	private static final Pattern _pattern = Pattern.compile(
+	private static final Pattern _dateModifiedPattern = Pattern.compile(
+		"dateModified eq (?<date>\\d{4}-\\d{2}-\\d{2})T.*Z");
+	private static final Pattern _roleIdsPattern = Pattern.compile(
 		"roleIds eq '\\d+'");
 
 	@Reference(
